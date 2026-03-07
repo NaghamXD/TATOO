@@ -1,0 +1,10 @@
+# Data files
+*.npy
+*.csv
+/data/
+
+# Environment folders
+.env
+venv/
+
+docs/
