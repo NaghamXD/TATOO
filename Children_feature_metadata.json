@@ -1,0 +1,321 @@
+{
+    "dataset": "Children",
+    "significant_vars": [
+        "T12_DOM_Test_Duration",
+        "T5_DOM_Number_Taps",
+        "T5_DOM_Touch_Time",
+        "T2_DOM_reaction_time",
+        "T6_DOM_correct_Attempts",
+        "T12_DOM_Drag_Not_Completed",
+        "T12_DOM_Drag_Completed_Successfully",
+        "T13_DOM_Test_Duration",
+        "T13_DOM_Touch_Multi_Fingers",
+        "T10_DOM_Touch_Time",
+        "T6_DOM_Reaction_Time",
+        "T5_DOM_Flight_Time",
+        "T1_DOM_reaction_time",
+        "T6_DOM_Test_Duration",
+        "T13_DOM_touch_time",
+        "T20_DOM_Touch_Outside_Target",
+        "T20_DOM_Test_Duration",
+        "T12_DOM_Drag_Attempts",
+        "T2_DOM_Touch_Time",
+        "T1_DOM_Touch_Time",
+        "T13_DOM_Drag_Completed_Successfully",
+        "T1_DOM_Flight_Time",
+        "T6_DOM_Flight_Time",
+        "T12_DOM_flight_time",
+        "T2_DOM_Flight_Time",
+        "T10_DOM_Test_Duration",
+        "T5_DOM_Touch_outside",
+        "T1_DOM_low_pressure",
+        "T1_DOM_high_pressure",
+        "T12_DOM_Reaction_Time",
+        "T20_DOM_touch_time",
+        "T10_DOM_Reaction_Time",
+        "T10_DOM_Correct_Attempts",
+        "T20_DOM_Flight_time",
+        "T5_DOM_Test_Duration",
+        "T12_DOM_touch_time",
+        "T5_DOM_Correct_Attempts",
+        "T13_DOM_Touch_outside_Target",
+        "T2_DOM_Test_Duration",
+        "T10_DOM_Touch_outside",
+        "T6_DOM_Touch_outside",
+        "T10_DOM_Flight_Time",
+        "T1_DOM_Number_Taps",
+        "T12_DOM_Touch_Outside_Target",
+        "T2_DOM_Correct_Attempts",
+        "T13_DOM_Reaction_Time",
+        "T13_DOM_flight_time"
+    ],
+    "insignificant_vars_to_drop": [
+        "T20_DOM_High_Pressure",
+        "T7_2_DOM_Attempts_Fixed",
+        "T10_DOM_low_pressure",
+        "T6_DOM_high_pressure",
+        "T7_2_DOM_Test_Duration",
+        "T7_2_DOM_Correct_Attempts",
+        "T7_2_DOM_Incorrect_Attempts",
+        "T2_DOM_medium_pressure",
+        "T7_1_DOM_Test_Duration",
+        "T7_2_DOM_Number_Taps",
+        "T1_DOM_medium_pressure",
+        "T20_DOM_Pinch_Completed",
+        "T7_2_DOM_High_Pressure",
+        "T7_1_DOM_Multi_Fingers_Tap",
+        "T6_DOM_medium_pressure",
+        "T7_1_DOM_Attempts_Fixed",
+        "T10_DOM_No_taps",
+        "T7_1_DOM_Incorrect_Attempts",
+        "T10_DOM_high_pressure",
+        "T7_2_DOM_Low_Pressure",
+        "T7_1_DOM_Flight_Time",
+        "T5_DOM_high_pressure",
+        "T10_DOM_Number_Taps",
+        "T7_1_DOM_Correct_Attempts",
+        "T5_DOM_medium_pressure",
+        "T6_DOM_No_taps",
+        "T6_DOM_low_pressure",
+        "T7_2_DOM_Flight_Time",
+        "T7_1_DOM_Low_Pressure",
+        "T7_2_DOM_Reaction_Time",
+        "T7_2_DOM_Medium_Pressure",
+        "T20_DOM_Low_Pressure",
+        "T7_1_DOM_Touch_Time",
+        "T7_2_DOM_Touch_Outside_Target",
+        "T2_DOM_low_pressure",
+        "T7_1_DOM_Number_Taps",
+        "T6_DOM_Number_Taps",
+        "T2_DOM_Number_Taps",
+        "T2_DOM_Touch_outside",
+        "T7_2_DOM_Touch_Time",
+        "T10_DOM_medium_pressure",
+        "T7_2_DOM_Multi_Fingers_Tap",
+        "T13_DOM_Drag_Not_Completed",
+        "T6_DOM_Touch_Time",
+        "T7_1_DOM_Touch_Outside_Target",
+        "T20_DOM_Reaction_Time",
+        "T5_DOM_low_pressure",
+        "T13_DOM_Total_Drag_Attempts",
+        "T7_1_DOM_Medium_Pressure",
+        "T20_DOM_Pinch_Not_Completed",
+        "T5_DOM_reaction_time",
+        "T7_1_DOM_High_Pressure",
+        "T7_1_DOM_Reaction_Time",
+        "T2_DOM_high_pressure",
+        "T20_DOM_Medium_Pressure"
+    ],
+    "skewed_vars_for_log_transform": [
+        "T12_DOM_Test_Duration",
+        "T5_DOM_Number_Taps",
+        "T5_DOM_Touch_Time",
+        "T2_DOM_reaction_time",
+        "T6_DOM_correct_Attempts",
+        "T12_DOM_Drag_Not_Completed",
+        "T12_DOM_Drag_Completed_Successfully",
+        "T13_DOM_Test_Duration",
+        "T13_DOM_Touch_Multi_Fingers",
+        "T6_DOM_Reaction_Time",
+        "T5_DOM_Flight_Time",
+        "T1_DOM_reaction_time",
+        "T6_DOM_Test_Duration",
+        "T13_DOM_touch_time",
+        "T20_DOM_Touch_Outside_Target",
+        "T20_DOM_Test_Duration",
+        "T12_DOM_Drag_Attempts",
+        "T2_DOM_Touch_Time",
+        "T13_DOM_Drag_Completed_Successfully",
+        "T1_DOM_Flight_Time",
+        "T6_DOM_Flight_Time",
+        "T12_DOM_flight_time",
+        "T2_DOM_Flight_Time",
+        "T10_DOM_Test_Duration",
+        "T5_DOM_Touch_outside",
+        "T12_DOM_Reaction_Time",
+        "T20_DOM_touch_time",
+        "T10_DOM_Reaction_Time",
+        "T10_DOM_Correct_Attempts",
+        "T20_DOM_Flight_time",
+        "T5_DOM_Test_Duration",
+        "T12_DOM_touch_time",
+        "T5_DOM_Correct_Attempts",
+        "T13_DOM_Touch_outside_Target",
+        "T2_DOM_Test_Duration",
+        "T10_DOM_Touch_outside",
+        "T6_DOM_Touch_outside",
+        "T10_DOM_Flight_Time",
+        "T12_DOM_Touch_Outside_Target",
+        "T2_DOM_Correct_Attempts",
+        "T13_DOM_Reaction_Time",
+        "T13_DOM_flight_time"
+    ],
+    "confounders_map": {
+        "T12_DOM_Test_Duration": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T5_DOM_Number_Taps": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T5_DOM_Touch_Time": [
+            "Age"
+        ],
+        "T2_DOM_reaction_time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T12_DOM_Drag_Not_Completed": [
+            "Frequency_Tablet_Use"
+        ],
+        "T12_DOM_Drag_Completed_Successfully": [
+            "Age"
+        ],
+        "T13_DOM_Test_Duration": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T13_DOM_Touch_Multi_Fingers": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T10_DOM_Touch_Time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T6_DOM_Reaction_Time": [
+            "Frequency_Tablet_Use"
+        ],
+        "T5_DOM_Flight_Time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T1_DOM_reaction_time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T6_DOM_Test_Duration": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T13_DOM_touch_time": [
+            "Age"
+        ],
+        "T20_DOM_Touch_Outside_Target": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T20_DOM_Test_Duration": [
+            "Age"
+        ],
+        "T12_DOM_Drag_Attempts": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T2_DOM_Touch_Time": [
+            "Age"
+        ],
+        "T1_DOM_Touch_Time": [
+            "Frequency_Tablet_Use"
+        ],
+        "T1_DOM_Flight_Time": [
+            "Frequency_Tablet_Use"
+        ],
+        "T6_DOM_Flight_Time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T12_DOM_flight_time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T2_DOM_Flight_Time": [
+            "Age"
+        ],
+        "T10_DOM_Test_Duration": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T5_DOM_Touch_outside": [
+            "Age"
+        ],
+        "T1_DOM_low_pressure": [
+            "Frequency_Tablet_Use"
+        ],
+        "T1_DOM_high_pressure": [
+            "Frequency_Tablet_Use"
+        ],
+        "T12_DOM_Reaction_Time": [
+            "Age"
+        ],
+        "T10_DOM_Reaction_Time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T10_DOM_Correct_Attempts": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T20_DOM_Flight_time": [
+            "Age"
+        ],
+        "T5_DOM_Test_Duration": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T12_DOM_touch_time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T13_DOM_Touch_outside_Target": [
+            "Frequency_Tablet_Use"
+        ],
+        "T2_DOM_Test_Duration": [
+            "Age"
+        ],
+        "T10_DOM_Flight_Time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T1_DOM_Number_Taps": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T12_DOM_Touch_Outside_Target": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T2_DOM_Correct_Attempts": [
+            "Age"
+        ],
+        "T13_DOM_Reaction_Time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ],
+        "T13_DOM_flight_time": [
+            "Age",
+            "Frequency_Tablet_Use"
+        ]
+    },
+    "highly_correlated_pairs": [
+        "T6_DOM_Test_Duration & T6_DOM_Flight_Time (r=0.965)",
+        "T12_DOM_Test_Duration & T12_DOM_flight_time (r=0.904)",
+        "T10_DOM_Touch_Time & T10_DOM_Test_Duration (r=0.892)",
+        "T1_DOM_low_pressure & T1_DOM_high_pressure (r=0.929)",
+        "T20_DOM_Test_Duration & T20_DOM_Flight_time (r=0.925)",
+        "T5_DOM_Flight_Time & T5_DOM_Test_Duration (r=0.995)",
+        "T12_DOM_Test_Duration & T12_DOM_touch_time (r=0.878)",
+        "T2_DOM_Flight_Time & T2_DOM_Test_Duration (r=0.86)"
+    ],
+    "redundant_vars_to_drop": [
+        "T20_DOM_Flight_time",
+        "T5_DOM_Test_Duration",
+        "T12_DOM_flight_time",
+        "T6_DOM_Flight_Time",
+        "T10_DOM_Test_Duration",
+        "T2_DOM_Test_Duration",
+        "T12_DOM_touch_time",
+        "T1_DOM_high_pressure"
+    ]
+}
