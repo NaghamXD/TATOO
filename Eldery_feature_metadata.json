@@ -115,11 +115,10 @@
         "T7_1_Reaction_Time",
         "T7_1_Correct_Attempts",
         "T7_1_Number_of_Taps",
+        "T7_1_Total_Flight_Time",
         "T7_2_Reaction_Time",
-        "T7_2_Total_Flight_Time",
         "T7_2_low_pressure",
         "T7_2_medium_pressure",
-        "T12_DOM_Test_Duration",
         "T5_DOM_Number_Taps",
         "T5_DOM_Touch_Time",
         "T2_DOM_reaction_time",
@@ -128,9 +127,7 @@
         "T12_DOM_Drag_Completed_Successfully",
         "T2_DOM_medium_pressure",
         "T13_DOM_Test_Duration",
-        "T5_DOM_Duration",
-        "T5_DOM_Flight_Time",
-        "T20_DOM_Pinch_Completed",
+        "T1_DOM_medium_pressure",
         "T1_DOM_reaction_time",
         "T13_DOM_touch_time",
         "T20_DOM_Test_Duration",
@@ -138,9 +135,13 @@
         "T2_DOM_Touch_Time",
         "T5_DOM_high_pressure",
         "T13_DOM_Drag_Completed_Successfully",
+        "T1_DOM_Flight_Time",
+        "T5_DOM_medium_pressure",
         "T6_DOM_static_medium_pressure",
         "T2_DOM_Flight_Time",
         "T5_DOM_Touch_outside",
+        "T2_DOM_low_pressure",
+        "T1_DOM_low_pressure",
         "T1_DOM_high_pressure",
         "T12_DOM_Reaction_Time",
         "T2_DOM_Number_Taps",
@@ -151,12 +152,11 @@
         "T6_DOM_moving_Number_of_Taps",
         "T12_DOM_touch_time",
         "T5_DOM_Correct_Attempts",
-        "T13_DOM_Drag_Not_Completed",
         "T20_DOM_Reaction_Time",
         "T2_DOM_Test_Duration",
+        "T5_DOM_low_pressure",
         "T13_DOM_Total_Drag_Attempts",
         "T6_DOM_static_Low_pressure",
-        "T20_DOM_Pinch_Not_Completed",
         "T5_DOM_reaction_time",
         "T6_DOM_static_Reaction_Time",
         "T13_DOM_flight_time",
@@ -190,12 +190,10 @@
         ],
         "T12_DOM_Test_Duration": [
             "Age",
-            "Gender",
             "Education"
         ],
         "T5_DOM_Number_Taps": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T5_DOM_Touch_Time": [
@@ -207,7 +205,6 @@
         ],
         "T12_DOM_Drag_Not_Completed": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T12_DOM_Drag_Completed_Successfully": [
@@ -215,28 +212,23 @@
         ],
         "T2_DOM_medium_pressure": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
         "T13_DOM_Test_Duration": [
             "Age",
-            "Gender",
             "Education"
         ],
         "T5_DOM_Duration": [
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
         "T5_DOM_Flight_Time": [
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
         "T1_DOM_medium_pressure": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
@@ -245,8 +237,7 @@
             "Frequency_Tablet_Use"
         ],
         "T1_DOM_reaction_time": [
-            "Age",
-            "Gender"
+            "Age"
         ],
         "T13_DOM_touch_time": [
             "Age"
@@ -256,7 +247,6 @@
         ],
         "T12_DOM_Drag_Attempts": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
@@ -266,13 +256,11 @@
         ],
         "T1_DOM_Touch_Time": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
         "T5_DOM_high_pressure": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T13_DOM_Drag_Completed_Successfully": [
@@ -283,7 +271,6 @@
         ],
         "T5_DOM_medium_pressure": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T6_DOM_static_medium_pressure": [
@@ -291,7 +278,6 @@
         ],
         "T12_DOM_flight_time": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
@@ -301,19 +287,16 @@
         ],
         "T2_DOM_low_pressure": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
         "T1_DOM_low_pressure": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
         "T1_DOM_high_pressure": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
@@ -322,12 +305,10 @@
         ],
         "T2_DOM_Number_Taps": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T13_DOM_Reactione_Time": [
             "Age",
-            "Gender",
             "Education"
         ],
         "T20_DOM_touch_time": [
@@ -335,24 +316,20 @@
             "Frequency_Tablet_Use"
         ],
         "T2_DOM_Touch_outside": [
-            "Age",
-            "Gender"
+            "Age"
         ],
         "T20_DOM_Flight_time": [
             "Frequency_Tablet_Use"
         ],
         "T12_DOM_touch_time": [
             "Age",
-            "Gender",
             "Education"
         ],
         "T5_DOM_Correct_Attempts": [
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T13_DOM_Drag_Not_Completed": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T20_DOM_Reaction_Time": [
@@ -360,19 +337,16 @@
         ],
         "T5_DOM_low_pressure": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T13_DOM_Total_Drag_Attempts": [
             "Frequency_Tablet_Use"
         ],
         "T6_DOM_static_Low_pressure": [
-            "Gender",
             "Frequency_Tablet_Use"
         ],
         "T20_DOM_Pinch_Not_Completed": [
             "Age",
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
@@ -380,7 +354,6 @@
             "Frequency_Tablet_Use"
         ],
         "T1_DOM_Number_Taps": [
-            "Gender",
             "Education",
             "Frequency_Tablet_Use"
         ],
@@ -393,7 +366,6 @@
         ],
         "T2_DOM_high_pressure": [
             "Age",
-            "Gender",
             "Frequency_Tablet_Use"
         ]
     },
@@ -408,13 +380,13 @@
         "T6_DOM_moving_Reaction_Time & T6_DOM_static_Reaction_Time (r=1.0)"
     ],
     "redundant_vars_to_drop": [
+        "T5_DOM_Duration",
         "T20_DOM_Flight_time",
-        "T1_DOM_low_pressure",
-        "T12_DOM_flight_time",
-        "T5_DOM_low_pressure",
         "T6_DOM_static_Reaction_Time",
         "T7_2_medium_pressure",
-        "T5_DOM_Flight_Time",
-        "T6_DOM_static_Low_pressure"
+        "T12_DOM_flight_time",
+        "T5_DOM_medium_pressure",
+        "T1_DOM_medium_pressure",
+        "T6_DOM_static_medium_pressure"
     ]
 }
