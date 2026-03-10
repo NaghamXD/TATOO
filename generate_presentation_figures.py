@@ -5,6 +5,9 @@ import scipy.stats as stats
 import json
 import os
 import numpy as np
+import warnings
+
+warnings.filterwarnings('ignore')
 
 def generate_presentation_figures(csv_file, json_file):
     dataset_name = os.path.basename(csv_file).split('_')[0]
@@ -96,9 +99,52 @@ def generate_presentation_figures(csv_file, json_file):
     plt.savefig(os.path.join(output_dir, f"{dataset_name}_Top4_Features_Grid.png"), dpi=300, bbox_inches='tight')
     plt.close()
 
+    # ==========================================
+    # FIGURE 3: Top 6 Differentiating Features Grid
+    # ==========================================
+    print("Finding the top 6 features and plotting the grid...")
+        
+    # Sort and grab the top 6 variables with the smallest p-values
+    top_6_vars = sorted(p_values, key=p_values.get)[:6]
+
+    # Create a 2x3 grid to hold 6 charts
+    fig, axes = plt.subplots(2, 3, figsize=(18, 10)) 
+    axes = axes.flatten()
+
+    for i, col in enumerate(top_6_vars):
+        clean_df = df.dropna(subset=[col, 'status'])
+        pval = p_values[col]
+        
+        # Format the p-value nicely for the title
+        pval_str = "< 0.0001" if pval < 0.0001 else f"= {pval:.4f}"
+        
+        # Boxplot with a swarmplot overlay
+        sns.boxplot(x='status', y=col, data=clean_df, ax=axes[i], palette="Pastel1", 
+                    showmeans=True, meanprops={"marker":"D", "markerfacecolor":"white", "markeredgecolor":"black"})
+        sns.swarmplot(x='status', y=col, data=clean_df, ax=axes[i], color=".25", alpha=0.5, size=6)
+        
+        axes[i].set_title(f"{col.replace('_', ' ')}\n(p {pval_str})", fontsize=14)
+        axes[i].set_xlabel("") 
+        axes[i].set_ylabel("Score / Time", fontsize=12)
+
+    plt.suptitle(f"{dataset_name}: Top 6 Most Discriminative Hand Function Tests", fontsize=18, y=1.02)
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, f"{dataset_name}_Top6_Features_Grid.png"), dpi=300, bbox_inches='tight')
+    plt.close()
+
+    # ==========================================
+    # EXPORT: Save Ranked Features List
+    # ==========================================
+    # Convert the p_values dictionary to a DataFrame, sort by p-value, and save
+    ranked_features_df = pd.DataFrame(list(p_values.items()), columns=['Feature', 'P-Value'])
+    ranked_features_df = ranked_features_df.sort_values(by='P-Value', ascending=True)
+    
+    csv_out_path = os.path.join(output_dir, f"{dataset_name}_Ranked_Features.csv")
+    ranked_features_df.to_csv(csv_out_path, index=False)
+    print(f"Ranked feature list saved to '{csv_out_path}'")
     print(f"Success! High-quality figures saved in '{output_dir}'.")
 
 if __name__ == "__main__":
     # Generate presentation figures for both datasets
-    generate_presentation_figures('Children_Final_ML_Ready.csv', 'Children_feature_metadata.json')
-    generate_presentation_figures('Eldery_Final_ML_Ready.csv', 'Eldery_feature_metadata.json')
+    generate_presentation_figures('data/Children_Final_ML_Ready.csv', 'data/Children_feature_metadata.json')
+    generate_presentation_figures('data/Eldery_Final_ML_Ready.csv', 'data/Eldery_feature_metadata.json')

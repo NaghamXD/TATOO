@@ -116,5 +116,5 @@ def create_eda_summaries(input_file, output_excel):
 
 # Run for both finalized datasets
 if __name__ == "__main__":
-    create_eda_summaries('Eldery_Final_ML_Ready.csv', 'Elderly_EDA_Summary.xlsx')
-    create_eda_summaries('Children_Final_ML_Ready.csv', 'Children_EDA_Summary.xlsx')
+    create_eda_summaries('data/Eldery_Final_ML_Ready.csv', 'data/Elderly_EDA_Summary.xlsx')
+    create_eda_summaries('data/Children_Final_ML_Ready.csv', 'data/Children_EDA_Summary.xlsx')

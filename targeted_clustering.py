@@ -4,8 +4,8 @@ import json
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
-from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.manifold import TSNE
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -21,23 +21,19 @@ def run_targeted_clustering(csv_file, json_file, tests_to_include, exclude_group
         
     target_col = 'status' if 'status' in df.columns else 'Group_Status'
     
-    # 2. Exclude specified groups (e.g., dropping Parkinson's)
+    # 2. Exclude specified groups
     if exclude_groups:
         initial_len = len(df)
         df = df[~df[target_col].isin(exclude_groups)]
         print(f"Excluded groups: {exclude_groups}. Dropped {initial_len - len(df)} subjects.")
 
-    # 3. Filter features: Must be significant, not redundant, AND belong to the requested tests
+    # 3. Filter features
     sig_vars = set(meta['significant_vars'])
     redundant_vars = set(meta['redundant_vars_to_drop'])
     skewed_vars = set(meta['skewed_vars_for_log_transform'])
     
     valid_features = list(sig_vars - redundant_vars)
-    
-    # Format test prefixes safely (e.g., 'T1' -> 'T1_') so 'T1' doesn't accidentally grab 'T12'
     test_prefixes = tuple([f"{t}_" for t in tests_to_include])
-    
-    # Keep only the features that belong to the tests we want for this specific scenario
     final_scenario_features = [f for f in valid_features if f.startswith(test_prefixes)]
     
     if not final_scenario_features:
@@ -47,10 +43,10 @@ def run_targeted_clustering(csv_file, json_file, tests_to_include, exclude_group
     print(f"Tests included: {tests_to_include}")
     print(f"Using {len(final_scenario_features)} features for this scenario.")
     
-    # 4. NOW we safely drop NA, knowing it's only looking at our targeted tests
+    # 4. Safely drop NA for targeted tests
     initial_len = len(df)
     df = df.dropna(subset=final_scenario_features + [target_col])
-    print(f"Dropped {initial_len - len(df)} subjects due to missing data in THESE specific tests. Remaining subjects: {len(df)}")
+    print(f"Remaining subjects after NA drop: {len(df)}")
     
     if len(df) < target_clusters:
         print("Not enough data left to cluster! Skipping...")
@@ -59,70 +55,112 @@ def run_targeted_clustering(csv_file, json_file, tests_to_include, exclude_group
     X = df[final_scenario_features].copy()
     y = df[target_col].copy()
     
-    # 5. Log-Transform
+    # 5. Log-Transform (with np.clip to fix negative sensor glitches!)
     for col in skewed_vars:
         if col in X.columns:
-            # Clip at 0 to prevent negative sensor glitches from causing NaN in log1p
             X[col] = np.log1p(np.clip(X[col], 0, None))
             
-    # 6. Scale & Cluster
+    # 6. Scale Data
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
-    kmeans = KMeans(n_clusters=target_clusters, random_state=42, n_init=10)
-    cluster_labels = kmeans.fit_predict(X_scaled)
+    # 7. Agglomerative Clustering
+    print("Running Agglomerative Clustering...")
+    # 'ward' linkage minimizes the variance of the clusters being merged
+    agg_cluster = AgglomerativeClustering(n_clusters=target_clusters, linkage='ward')
+    cluster_labels = agg_cluster.fit_predict(X_scaled)
     
-    # 7. PCA for Visualization
-    pca = PCA(n_components=2)
-    X_pca = pca.fit_transform(X_scaled)
+    # 8. t-SNE for Advanced Visualization
+    print("Running t-SNE to separate non-linear overlapping clusters (this may take a few seconds)...")
+    # perplexity dictates how to balance local vs global aspects of the data. 30 is a good default.
+    tsne = TSNE(n_components=2, random_state=42, perplexity=30, max_iter=1000)
+    X_viz = tsne.fit_transform(X_scaled)
     
     plot_df = pd.DataFrame({
-        'PCA_1': X_pca[:, 0],
-        'PCA_2': X_pca[:, 1],
+        'Dim_1': X_viz[:, 0],
+        'Dim_2': X_viz[:, 1],
         'True_Status': y.values,
-        'KMeans_Cluster': [f"Cluster {c}" for c in cluster_labels]
+        'Cluster': [f"Cluster {c}" for c in cluster_labels]
     })
     
-    # 8. Plotting
+    # 9. Plotting
     fig, axes = plt.subplots(1, 2, figsize=(16, 6))
     
-    sns.scatterplot(data=plot_df, x='PCA_1', y='PCA_2', hue='True_Status', palette='tab10', ax=axes[0], alpha=0.8, s=60)
-    axes[0].set_title(f'Actual Clinical Status (Ground Truth)\n{scenario_name}')
+    sns.scatterplot(data=plot_df, x='Dim_1', y='Dim_2', hue='True_Status', palette='tab10', ax=axes[0], alpha=0.8, s=60)
+    axes[0].set_title(f'Actual Clinical Status (t-SNE)\n{scenario_name}')
     axes[0].legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='small')
     
-    sns.scatterplot(data=plot_df, x='PCA_1', y='PCA_2', hue='KMeans_Cluster', palette='Set2', ax=axes[1], alpha=0.8, s=60)
-    axes[1].set_title(f'K-Means Blind Clustering ({target_clusters} Clusters)\n{scenario_name}')
+    sns.scatterplot(data=plot_df, x='Dim_1', y='Dim_2', hue='Cluster', palette='Set2', ax=axes[1], alpha=0.8, s=60)
+    axes[1].set_title(f'Agglomerative Blind Clustering ({target_clusters} Clusters)\n{scenario_name}')
     
     plt.tight_layout()
-    filename = scenario_name.replace(" ", "_").replace(",", "") + ".png"
+    filename = scenario_name.replace(" ", "_").replace(",", "") + "_tSNE_Agg.png"
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     print(f"Success! Saved visualization to '{filename}'\n")
-
 
 if __name__ == "__main__":
     # ==========================================
     # ELDERLY SCENARIOS
     # ==========================================
     try:
-        # Scenario 1: The "Universal" Elderly Clustering (All groups, fewer tests)
         run_targeted_clustering(
-            csv_file='Eldery_Final_ML_Ready.csv', 
-            json_file='Eldery_feature_metadata.json',
+            csv_file='data/Eldery_Final_ML_Ready.csv', 
+            json_file='data/Eldery_feature_metadata.json',
             tests_to_include=['T5', 'T13', 'T20'], 
             exclude_groups=None, 
             target_clusters=5, 
             scenario_name="Elderly - Universal Battery (T5, T13, T20)"
         )
         
-        # Scenario 2: The "Deep Dive" Elderly Clustering (Exclude Parkinson's, more tests)
         run_targeted_clustering(
-            csv_file='Eldery_Final_ML_Ready.csv', 
-            json_file='Eldery_feature_metadata.json',
+            csv_file='data/Eldery_Final_ML_Ready.csv', 
+            json_file='data/Eldery_feature_metadata.json',
             tests_to_include=['T1', 'T2', 'T5', 'T12', 'T13', 'T20'], 
             exclude_groups=['Parkinson'], 
             target_clusters=4, 
             scenario_name="Elderly - Deep Dive (No Parkinson's)"
         )
+
+        # Scenario 3: The Elderly Clustering (Exclude Parkinson's, more tests)
+        run_targeted_clustering(
+            csv_file='data/Eldery_Final_ML_Ready.csv', 
+            json_file='data/Eldery_feature_metadata.json',
+            tests_to_include=['T1', 'T2', 'T12'], 
+            exclude_groups=None, 
+            target_clusters=5, 
+            scenario_name="Elderly - Only T1, T2, T12 (No Parkinson's)"
+        )
+
+        # Scenario 4: The Elderly Clustering (Exclude Parkinson's, more tests)
+        run_targeted_clustering(
+            csv_file='data/Eldery_Final_ML_Ready.csv', 
+            json_file='data/Eldery_feature_metadata.json',
+            tests_to_include=['T5', 'T20'], 
+            exclude_groups=None,
+            target_clusters=5, 
+            scenario_name="Elderly - Only T5, T20 Discriminative Tests"
+        )
+
+        # Scenario 5: The Elderly Clustering (Exclude Parkinson's, more tests)
+        run_targeted_clustering(
+            csv_file='data/Eldery_Final_ML_Ready.csv', 
+            json_file='data/Eldery_feature_metadata.json',
+            tests_to_include=['T2', 'T5', 'T20'], 
+            exclude_groups=['Parkinson'], 
+            target_clusters=4, 
+            scenario_name="Elderly - Only T2, T5, T20 Discriminative Tests (No Parkinson's)"
+        )
+
+        # Scenario 6: Only Parkinson and Falls and cognitive decline Patients, Only T5, T6, T7, T13, T20
+        run_targeted_clustering(
+            csv_file='data/Eldery_Final_ML_Ready.csv', 
+            json_file='data/Eldery_feature_metadata.json',
+            tests_to_include=['T5', 'T6', 'T7', 'T13', 'T20'], 
+            exclude_groups=None, 
+            target_clusters=2, 
+            scenario_name="Elderly - Only T5, T6, T7, T13, T20 (Only Parkinson's, Falls, Cognitive Decline)"
+        )
+
     except FileNotFoundError:
         print("Elderly files not found.")
 
@@ -130,24 +168,33 @@ if __name__ == "__main__":
     # CHILDREN SCENARIOS
     # ==========================================
     try:
-        # Scenario 1: Base Children Clustering
         run_targeted_clustering(
-            csv_file='Children_Final_ML_Ready.csv', 
-            json_file='Children_feature_metadata.json',
-            tests_to_include=['T1', 'T2', 'T5', 'T12', 'T13', 'T20'], 
-            exclude_groups=None, 
-            target_clusters=4, 
-            scenario_name="Children - Core Battery"
-        )
-        
-        '''# Scenario 2: Children Deep Dive (Adding T1)
-        run_targeted_clustering(
-            csv_file='Children_Final_ML_Ready.csv', 
-            json_file='Children_feature_metadata.json',
+            csv_file='data/Children_Final_ML_Ready.csv', 
+            json_file='data/Children_feature_metadata.json',
             tests_to_include=['T1', 'T2', 'T5', 'T12', 'T13', 'T20'], 
             exclude_groups=None, 
             target_clusters=3, 
-            scenario_name="Children - Extended Battery (With T1)"
-        )'''
+            scenario_name="Children - Core Battery"
+        )
+        
+        run_targeted_clustering(
+            csv_file='data/Children_Final_ML_Ready.csv', 
+            json_file='data/Children_feature_metadata.json',
+            tests_to_include=['T1', 'T5'], 
+            exclude_groups=None, 
+            target_clusters=3, 
+            scenario_name="Children - Discriminative Tests Only (T1, T5)"
+        )
+
+        # Scenario 3: Follow the Elderly Tests (T1, T2, T12)
+        run_targeted_clustering(
+            csv_file='data/Children_Final_ML_Ready.csv', 
+            json_file='data/Children_feature_metadata.json',
+            tests_to_include=['T1', 'T2', 'T12'], 
+            exclude_groups=None, 
+            target_clusters=3, 
+            scenario_name="Children - Follow Eldery Tests (T1, T2, T12)"
+        )
+
     except FileNotFoundError:
         print("Children files not found.")

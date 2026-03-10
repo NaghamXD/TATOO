@@ -203,5 +203,5 @@ def run_feature_selection_pipeline(file_path, demographic_cols, corr_threshold=0
 if __name__ == "__main__":
     my_demographics = ['Age', 'Gender', 'Education', 'Frequency_Tablet_Use']
     
-    run_feature_selection_pipeline('Children_Final_ML_Ready.csv', my_demographics, corr_threshold=0.85)
-    run_feature_selection_pipeline('Eldery_Final_ML_Ready.csv', my_demographics, corr_threshold=0.85)
+    run_feature_selection_pipeline('data/Children_Final_ML_Ready.csv', my_demographics, corr_threshold=0.85)
+    run_feature_selection_pipeline('data/Eldery_Final_ML_Ready.csv', my_demographics, corr_threshold=0.85)

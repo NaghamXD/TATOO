@@ -206,7 +206,7 @@ def process_demographics(input_file, is_children=False):
     
     vars_to_drop = set() 
     
-    # We now iterate over pure 'status' instead of 'Group_Status'
+    # Iterate over pure 'status' to delete the variables that has NA for some of the status groups in the played tests
     if 'status' in df.columns:
         for stat in sorted(df['status'].dropna().unique()):
             stat_df = df[df['status'] == stat]
@@ -278,9 +278,8 @@ if __name__ == "__main__":
 
     # Process Cleaned Data files (independent file loading inside the function)
     try:
-        # Changed .xls to .xlsx right here:
-        clean_tablet_data('data/Eldery_data.xlsx', 'Eldery_data_Cleaned_DominantOnly.csv') 
-        clean_tablet_data('data/Children_data.xlsx', 'Children_data_Cleaned_DominantOnly.csv')
+        clean_tablet_data('data/Eldery_data.xlsx', 'data/Eldery_data_Cleaned_DominantOnly.csv') 
+        clean_tablet_data('data/Children_data.xlsx', 'data/Children_data_Cleaned_DominantOnly.csv')
     except Exception as e:
         print(f"Error during data cleaning step: {e}")
         
@@ -288,12 +287,12 @@ if __name__ == "__main__":
 
 
     # Apply the processing function to both files
-    df_elderly_final = process_demographics('Eldery_data_Cleaned_DominantOnly.csv', is_children=False)
-    df_children_final = process_demographics('Children_data_Cleaned_DominantOnly.csv', is_children=True)
+    df_elderly_final = process_demographics('data/Eldery_data_Cleaned_DominantOnly.csv', is_children=False)
+    df_children_final = process_demographics('data/Children_data_Cleaned_DominantOnly.csv', is_children=True)
 
     # Save the final, ML-Ready DataFrames
-    elderly_output = 'Eldery_Final_ML_Ready.csv'
-    children_output = 'Children_Final_ML_Ready.csv'
+    elderly_output = 'data/Eldery_Final_ML_Ready.csv'
+    children_output = 'data/Children_Final_ML_Ready.csv'
 
     df_elderly_final.to_csv(elderly_output)
     df_children_final.to_csv(children_output)
