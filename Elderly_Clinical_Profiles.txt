@@ -1,0 +1,97 @@
+CLINICAL PHENOTYPE REPORT: ELDERLY
+Baseline for comparison: 'healthy'
+============================================================
+
+► PROFILE: PARKINSON
+  (Based on tests performed by this cohort)
+
+  [Speed & Reaction]
+    - T13 Reactione Time: Decreased by 48.9% (Patient: 1.26 vs Healthy: 2.46)
+    - T20 Reaction Time: Decreased by 43.4% (Patient: 0.97 vs Healthy: 1.71)
+    - T20 Flight time: Decreased by 39.6% (Patient: 2.90 vs Healthy: 4.80)
+    - T13 touch time: Increased by 37.1% (Patient: 9.60 vs Healthy: 7.00)
+
+  [Touch Pressure]
+    - No significant deviations from healthy baseline.
+
+  [Accuracy & Errors]
+    - T5 Touch outside: Decreased by 100.0% (Patient: 0.00 vs Healthy: 1.00)
+
+  [Complex Kinematics]
+    - T5 Number Taps: Decreased by 31.2% (Patient: 11.00 vs Healthy: 16.00)
+    - T13 Total Drag Attempts: Decreased by 25.0% (Patient: 3.00 vs Healthy: 4.00)
+
+------------------------------------------------------------
+
+► PROFILE: FALLS AND COGNITIVE DECLINE
+  (Based on tests performed by this cohort)
+
+  [Speed & Reaction]
+    - T1 Touch Time: Increased by 113.1% (Patient: 21.20 vs Healthy: 9.95)
+    - T13 touch time: Increased by 102.9% (Patient: 14.20 vs Healthy: 7.00)
+    - T1 Flight Time: Decreased by 100.0% (Patient: 0.00 vs Healthy: 22.70)
+    - T20 touch time: Increased by 42.9% (Patient: 3.00 vs Healthy: 2.10)
+
+  [Touch Pressure]
+    - T1 medium pressure: Increased by 4250.0% (Patient: 87.00 vs Healthy: 2.00)
+    - T2 low pressure: Decreased by 97.8% (Patient: 2.00 vs Healthy: 89.00)
+    - T1 low pressure: Decreased by 89.0% (Patient: 10.80 vs Healthy: 98.00)
+    - T5 low pressure: Decreased by 30.0% (Patient: 70.00 vs Healthy: 100.00)
+
+  [Accuracy & Errors]
+    - T5 Touch outside: Decreased by 30.0% (Patient: 0.70 vs Healthy: 1.00)
+
+  [Complex Kinematics]
+    - T2 Number Taps: Increased by 25.0% (Patient: 10.00 vs Healthy: 8.00)
+    - T13 Total Drag Attempts: Increased by 25.0% (Patient: 5.00 vs Healthy: 4.00)
+    - T5 Number Taps: Decreased by 6.2% (Patient: 15.00 vs Healthy: 16.00)
+
+------------------------------------------------------------
+
+► PROFILE: DIABETES
+  (Based on tests performed by this cohort)
+
+  [Speed & Reaction]
+    - T20 touch time: Decreased by 57.1% (Patient: 0.90 vs Healthy: 2.10)
+    - T12 flight time: Decreased by 56.7% (Patient: 9.30 vs Healthy: 21.50)
+    - T5 Flight Time: Decreased by 51.7% (Patient: 5.00 vs Healthy: 10.35)
+    - T5 Touch Time: Decreased by 50.0% (Patient: 0.40 vs Healthy: 0.80)
+
+  [Touch Pressure]
+    - T1 medium pressure: Increased by 175.0% (Patient: 5.50 vs Healthy: 2.00)
+
+  [Accuracy & Errors]
+    - T5 Touch outside: Decreased by 100.0% (Patient: 0.00 vs Healthy: 1.00)
+
+  [Complex Kinematics]
+    - T1 Number Taps: Increased by 50.5% (Patient: 161.00 vs Healthy: 107.00)
+    - T5 Number Taps: Decreased by 37.5% (Patient: 10.00 vs Healthy: 16.00)
+    - T12 Drag Attempts: Decreased by 33.3% (Patient: 6.00 vs Healthy: 9.00)
+
+------------------------------------------------------------
+
+► PROFILE: IDD
+  (Based on tests performed by this cohort)
+
+  [Speed & Reaction]
+    - T2 Touch Time: Increased by 1135.0% (Patient: 9.88 vs Healthy: 0.80)
+    - T5 Touch Time: Increased by 508.1% (Patient: 4.87 vs Healthy: 0.80)
+    - T20 touch time: Increased by 390.2% (Patient: 10.29 vs Healthy: 2.10)
+    - T20 Test Duration: Increased by 107.0% (Patient: 20.70 vs Healthy: 10.00)
+
+  [Touch Pressure]
+    - T1 medium pressure: Increased by 2350.0% (Patient: 49.00 vs Healthy: 2.00)
+    - T1 low pressure: Decreased by 79.6% (Patient: 20.00 vs Healthy: 98.00)
+    - T5 low pressure: Decreased by 75.0% (Patient: 25.00 vs Healthy: 100.00)
+    - T2 low pressure: Decreased by 71.9% (Patient: 25.00 vs Healthy: 89.00)
+
+  [Accuracy & Errors]
+    - T5 Touch outside: Increased by 3650.0% (Patient: 37.50 vs Healthy: 1.00)
+
+  [Complex Kinematics]
+    - T5 Number Taps: Increased by 175.0% (Patient: 44.00 vs Healthy: 16.00)
+    - T2 Number Taps: Increased by 31.2% (Patient: 10.50 vs Healthy: 8.00)
+    - T13 Total Drag Attempts: Increased by 25.0% (Patient: 5.00 vs Healthy: 4.00)
+    - T12 Drag Completed Successfully: Decreased by 10.0% (Patient: 4.50 vs Healthy: 5.00)
+
+------------------------------------------------------------
