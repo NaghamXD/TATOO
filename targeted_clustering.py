@@ -186,14 +186,14 @@ if __name__ == "__main__":
             scenario_name="Children - Discriminative Tests Only (T1, T5)"
         )
 
-        # Scenario 3: Follow the Elderly Tests (T1, T2, T12)
+        # Scenario 3: The Elderly Clustering (Exclude Parkinson's, more tests)
         run_targeted_clustering(
             csv_file='data/Children_Final_ML_Ready.csv', 
             json_file='data/Children_feature_metadata.json',
-            tests_to_include=['T1', 'T2', 'T12'], 
+            tests_to_include=['T1', 'T12', 'T20'], 
             exclude_groups=None, 
             target_clusters=3, 
-            scenario_name="Children - Follow Eldery Tests (T1, T2, T12)"
+            scenario_name="Children - Most Imortant Tests (T1, T12,T20)"
         )
 
     except FileNotFoundError:

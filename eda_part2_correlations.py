@@ -93,5 +93,5 @@ def generate_status_correlation_heatmap(input_file, output_image_name, dataset_n
 
 # Run for both finalized datasets
 if __name__ == "__main__":
-    generate_status_correlation_heatmap('data/Eldery_Final_ML_Ready.csv', 'Elderly_Correlation_Heatmap.png', 'Elderly')
-    generate_status_correlation_heatmap('data/Children_Final_ML_Ready.csv', 'Children_Correlation_Heatmap.png', 'Children')
+    generate_status_correlation_heatmap('data/Eldery_Final_ML_Ready.csv', 'Elderly_Correlation_Heatmap_table.png', 'Elderly')
+    generate_status_correlation_heatmap('data/Children_Final_ML_Ready.csv', 'Children_Correlation_Heatmap_table.png', 'Children')
