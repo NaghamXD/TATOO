@@ -120,19 +120,26 @@ def plot_feature_violins(csv_file, top_features, dataset_name):
     unique_statuses = sorted(melted_df[target_col].dropna().unique())
 
     # Optional clinical ordering (if present)
-    preferred_order = [
+    if dataset_name == "Elderly":
+        preferred_order = [
         "Healthy",
         "Parkinson",
         "Idd",
         "Diabetes",
         "Falls And Cognitive Decline"
-    ]
+        ]
+    else:  # Children
+        preferred_order = [
+            "Healthy",
+            "Sma",
+            "Chronic Otitis Media"
+        ]
     ordered_statuses = [s for s in preferred_order if s in unique_statuses]
 
     if ordered_statuses:
         unique_statuses = ordered_statuses
 
-        # --------------------------------------------------
+    # --------------------------------------------------
     # 8. Plot violin charts (with colors per status)
     # --------------------------------------------------
 
@@ -205,3 +212,19 @@ if __name__ == "__main__":
     
     plot_deviation_heatmap(elderly_file, top_elderly_features, "Elderly")
     plot_feature_violins(elderly_file, top_elderly_features, "Elderly")
+
+        # The raw dataset file (NOT the medians file, we need raw data for violins)
+    children_file = 'data/Children_Final_ML_Ready.csv'
+    
+    # Pick the 3 to 6 best features that defined your XGBoost models
+    top_children_features = [
+        "T1_DOM_high_pressure",      
+        "T5_DOM_Test_Duration",  
+        "T20_DOM_Medium_Pressure",     
+        "T2_DOM_low_pressure",
+        "T1_DOM_Touch_Time",
+        "T12_DOM_Drag_Attempts" 
+    ]
+    
+    plot_deviation_heatmap(children_file, top_children_features, "Children")
+    plot_feature_violins(children_file, top_children_features, "Children")
