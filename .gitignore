@@ -8,3 +8,8 @@
 venv/
 
 docs/
+# Ignore raw and processed gaze data
+gaze_analysis/data/raw/*
+gaze_analysis/data/processed/*
+!gaze_analysis/data/raw/.gitkeep
+!gaze_analysis/data/processed/.gitkeep
