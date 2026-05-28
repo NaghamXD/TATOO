@@ -8,8 +8,26 @@
 venv/
 
 docs/
-# Ignore raw and processed gaze data
+
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore raw and processed gaze data (old app)
 gaze_analysis/data/raw/*
 gaze_analysis/data/processed/*
 !gaze_analysis/data/raw/.gitkeep
 !gaze_analysis/data/processed/.gitkeep
+
+# Ignore raw and processed gaze data (new app)
+gaze_analysis/data/raw_new_app/
+gaze_analysis/data/processed_new_app/
+
+# Generated results and figures
+gaze_analysis/results/
+results/
