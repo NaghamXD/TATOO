@@ -13,12 +13,13 @@ warnings.filterwarnings('ignore')
 # --- CONFIGURATION ---
 PROCESSED_DIR = "gaze_analysis/data/processed/"
 RESULTS_DIR = "gaze_analysis/results/"
+FEATURE_IMPORTANCE_DIR = os.path.join(RESULTS_DIR, "feature_importance")
 
 # Toggle this between 'Target_Age_Old' and 'Target_Visual_Impaired'
-TARGET_COLUMN = 'Target_Age_Old' 
+TARGET_COLUMN = 'Target_Age_Old'
 
-if not os.path.exists(RESULTS_DIR):
-    os.makedirs(RESULTS_DIR)
+if not os.path.exists(FEATURE_IMPORTANCE_DIR):
+    os.makedirs(FEATURE_IMPORTANCE_DIR)
 
 def train_and_evaluate(game_name):
     file_path = os.path.join(PROCESSED_DIR, f"MASTER_{game_name}.csv")
@@ -111,7 +112,7 @@ def train_and_evaluate(game_name):
     plt.ylabel("")
     plt.tight_layout()
     
-    plot_path = os.path.join(RESULTS_DIR, f"{game_name}_{TARGET_COLUMN}_Importance.png")
+    plot_path = os.path.join(FEATURE_IMPORTANCE_DIR, f"{game_name}_{TARGET_COLUMN}_Importance.png")
     plt.savefig(plot_path, dpi=300)
     plt.close()
 

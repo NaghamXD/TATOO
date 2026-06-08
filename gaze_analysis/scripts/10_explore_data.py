@@ -16,11 +16,12 @@ warnings.filterwarnings('ignore')
 # --- CONFIGURATION ---
 PROCESSED_DIR = "gaze_analysis/data/processed/"
 RESULTS_DIR = "gaze_analysis/results/"
+DATA_EXPLORATION_DIR = os.path.join(RESULTS_DIR, "data_exploration")
 
 TARGET_GAMES = ['TouchIt', 'CornerIt', 'DoubleTapIt', 'PinchIt', 'SlideIt', 'DragIt']
 
-if not os.path.exists(RESULTS_DIR):
-    os.makedirs(RESULTS_DIR)
+if not os.path.exists(DATA_EXPLORATION_DIR):
+    os.makedirs(DATA_EXPLORATION_DIR)
 
 def explore_demographics():
     """
@@ -62,7 +63,7 @@ def explore_demographics():
         axes[2].set_xlabel('Class')
         
     plt.tight_layout()
-    plot_path = os.path.join(RESULTS_DIR, "Demographics_Distributions.png")
+    plot_path = os.path.join(DATA_EXPLORATION_DIR, "Demographics_Distributions.png")
     plt.savefig(plot_path, dpi=300)
     plt.close()
     
@@ -108,7 +109,7 @@ def map_features_to_games():
     # Sort so the universal features are at the top, and game-specific ones at the bottom
     map_df = map_df.sort_values(by=['Total_Games', 'Feature_Name'], ascending=[False, True])
     
-    out_path = os.path.join(RESULTS_DIR, "Feature_Game_Mapping.csv")
+    out_path = os.path.join(DATA_EXPLORATION_DIR, "Feature_Game_Mapping.csv")
     map_df.to_csv(out_path, index=False)
     
     print(f"✅ Mapped {len(map_df)} unique features across all datasets.")
@@ -165,7 +166,7 @@ def explore_cross_game_features():
             plt.xlabel("Game")
             plt.tight_layout()
             
-            plot_path = os.path.join(RESULTS_DIR, f"CrossGame_{feature}_Distribution.png")
+            plot_path = os.path.join(DATA_EXPLORATION_DIR, f"CrossGame_{feature}_Distribution.png")
             plt.savefig(plot_path, dpi=300)
             plt.close()
             print(f"🖼️ Saved Overlap Plot for '{feature}' to: {plot_path}")

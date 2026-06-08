@@ -14,10 +14,13 @@ warnings.filterwarnings('ignore')
 # --- CONFIGURATION ---
 PROCESSED_DIR = "gaze_analysis/data/processed/"
 RESULTS_DIR = "gaze_analysis/results/"
-TARGET_COLUMN = 'Target_Age_Old'  
+FEATURE_IMPORTANCE_DIR = os.path.join(RESULTS_DIR, "feature_importance")
+MODEL_PERFORMANCE_DIR = os.path.join(RESULTS_DIR, "model_performance")
+TARGET_COLUMN = 'Target_Age_Old'
 
-if not os.path.exists(RESULTS_DIR):
-    os.makedirs(RESULTS_DIR)
+for _dir in (FEATURE_IMPORTANCE_DIR, MODEL_PERFORMANCE_DIR):
+    if not os.path.exists(_dir):
+        os.makedirs(_dir)
 
 def train_and_evaluate(game_name):
     file_path = os.path.join(PROCESSED_DIR, f"MASTER_{game_name}.csv")
@@ -79,7 +82,7 @@ def train_and_evaluate(game_name):
     sns.barplot(x='Importance', y='Feature', data=importance_df, palette='viridis')
     plt.title(f"Top Biomarkers: {game_name}")
     plt.tight_layout()
-    plt.savefig(os.path.join(RESULTS_DIR, f"{game_name}_Importance.png"), dpi=300)
+    plt.savefig(os.path.join(FEATURE_IMPORTANCE_DIR, f"{game_name}_Importance.png"), dpi=300)
     plt.close()
     
     return patient_performance
@@ -113,11 +116,11 @@ if __name__ == "__main__":
     plt.xlabel("Game Type")
     plt.tight_layout()
     
-    matrix_plot_path = os.path.join(RESULTS_DIR, "User_Performance_Matrix.png")
+    matrix_plot_path = os.path.join(MODEL_PERFORMANCE_DIR, "User_Performance_Matrix.png")
     plt.savefig(matrix_plot_path, dpi=300)
-    
+
     # Save as CSV for detailed analysis
-    perf_matrix.to_csv(os.path.join(RESULTS_DIR, "User_Performance_Matrix.csv"))
+    perf_matrix.to_csv(os.path.join(MODEL_PERFORMANCE_DIR, "User_Performance_Matrix.csv"))
     
     print(f"\n🎉 Pipeline Complete!")
     print(f"🖼️  Saved Performance Matrix to: {matrix_plot_path}")

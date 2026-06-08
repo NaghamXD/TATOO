@@ -12,8 +12,13 @@ warnings.filterwarnings('ignore')
 # --- CONFIGURATION ---
 PROCESSED_DIR = "gaze_analysis/data/processed/"
 RESULTS_DIR = "gaze_analysis/results/"
-MAPPING_PATH = os.path.join(RESULTS_DIR, "Feature_Game_Mapping.csv")
+DATA_EXPLORATION_DIR = os.path.join(RESULTS_DIR, "data_exploration")
+TSNE_DIR = os.path.join(RESULTS_DIR, "tSNE")
+MAPPING_PATH = os.path.join(DATA_EXPLORATION_DIR, "Feature_Game_Mapping.csv")
 TARGET_COLUMN = 'Target_Age_Old'  # 1 = Old (65+), 0 = Young (<65)
+
+if not os.path.exists(TSNE_DIR):
+    os.makedirs(TSNE_DIR)
 
 COLS_TO_DROP = [
     'Patient_ID', 'Age', 'Target_Age_Old', 'Target_Visual_Impaired',
@@ -110,7 +115,7 @@ if __name__ == "__main__":
                         ax.legend(loc='best', fontsize=10)
 
                     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-                    save_path = os.path.join(RESULTS_DIR, f"tSNE_Grid_{game}_Age_Categorized.png")
+                    save_path = os.path.join(TSNE_DIR, f"tSNE_Grid_{game}_Age_Categorized.png")
                     plt.savefig(save_path, dpi=300)
                     plt.close()
                     print(f"✅ Saved comparison grid to: {save_path}")

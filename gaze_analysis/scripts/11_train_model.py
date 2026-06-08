@@ -14,6 +14,9 @@ warnings.filterwarnings('ignore')
 # --- CONFIGURATION ---
 PROCESSED_DIR = "gaze_analysis/data/processed/"
 RESULTS_DIR = "gaze_analysis/results/"
+FEATURE_IMPORTANCE_DIR = os.path.join(RESULTS_DIR, "feature_importance")
+if not os.path.exists(FEATURE_IMPORTANCE_DIR):
+    os.makedirs(FEATURE_IMPORTANCE_DIR)
 
 # Change this to 'Target_Visual_Impaired' to run your second experiment!
 # 'Target_Age_Old' is the label for whether a patient is 65 or older (1) or younger than 65 (0)
@@ -101,7 +104,7 @@ def train_and_evaluate(game_name):
     plt.tight_layout()
     
     # Save the plot directly to your results folder
-    plot_path = os.path.join(RESULTS_DIR, f"{game_name}_{TARGET_COLUMN}_Importance.png")
+    plot_path = os.path.join(FEATURE_IMPORTANCE_DIR, f"{game_name}_{TARGET_COLUMN}_Importance.png")
     plt.savefig(plot_path, dpi=300)
     plt.close()
     

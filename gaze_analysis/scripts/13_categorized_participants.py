@@ -5,8 +5,9 @@ import os
 
 # --- CONFIGURATION ---
 RESULTS_DIR = "gaze_analysis/results"
-if not os.path.exists(RESULTS_DIR):
-    os.makedirs(RESULTS_DIR)
+DATA_EXPLORATION_DIR = os.path.join(RESULTS_DIR, "data_exploration")
+if not os.path.exists(DATA_EXPLORATION_DIR):
+    os.makedirs(DATA_EXPLORATION_DIR)
 
 # Load the demographic data
 file_path = 'gaze_analysis/data/processed/demographicsv2.csv'
@@ -48,12 +49,12 @@ plt.axvline(x=50, color='black', linestyle='--', alpha=0.5)
 plt.tight_layout()
 
 # Save the plot directly to your results folder
-plot_output = os.path.join(RESULTS_DIR, 'Participant_Age_Device_Visualization.png')
+plot_output = os.path.join(DATA_EXPLORATION_DIR, 'Participant_Age_Device_Visualization.png')
 plt.savefig(plot_output, dpi=300)
 plt.close()
 
 # Save the categorized list for reference
-csv_output = os.path.join(RESULTS_DIR, 'Categorized_Participants.csv')
+csv_output = os.path.join(DATA_EXPLORATION_DIR, 'Categorized_Participants.csv')
 df_sorted[['Code', 'Age', 'Age_Category', 'Has Tablet ot Smart Phone']].to_csv(csv_output, index=False)
 
 print(f"✅ Saved plot to: {plot_output}")

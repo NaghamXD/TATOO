@@ -14,8 +14,13 @@ warnings.filterwarnings('ignore')
 # --- CONFIGURATION ---
 PROCESSED_DIR = "gaze_analysis/data/processed/"
 RESULTS_DIR = "gaze_analysis/results/"
-MAPPING_PATH = os.path.join(RESULTS_DIR, "Feature_Game_Mapping.csv")
+DATA_EXPLORATION_DIR = os.path.join(RESULTS_DIR, "data_exploration")
+FEATURE_IMPORTANCE_DIR = os.path.join(RESULTS_DIR, "feature_importance")
+MAPPING_PATH = os.path.join(DATA_EXPLORATION_DIR, "Feature_Game_Mapping.csv")
 TARGET_COLUMN = 'Target_Age_Old'
+
+if not os.path.exists(FEATURE_IMPORTANCE_DIR):
+    os.makedirs(FEATURE_IMPORTANCE_DIR)
 
 COLS_TO_DROP = [
     'Patient_ID', 'Age', 'Target_Age_Old', 'Target_Visual_Impaired',
@@ -146,6 +151,6 @@ if __name__ == "__main__":
                   fontsize=16, fontweight='bold')
         plt.tight_layout()
         
-        out_path = os.path.join(RESULTS_DIR, "Final_Audit_Importance_Matrix.png")
+        out_path = os.path.join(FEATURE_IMPORTANCE_DIR, "Final_Audit_Importance_Matrix.png")
         plt.savefig(out_path, dpi=300)
         print(f"✅ Success! Matrix saved to: {out_path}")
