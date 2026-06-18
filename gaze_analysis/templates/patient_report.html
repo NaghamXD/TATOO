@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    @page {
+        size: A4;
+        margin: 1.6cm;
+        @bottom-center {
+            content: "Patient " "{{ patient_id }}" "  ·  Page " counter(page) " of " counter(pages);
+            font-size: 8pt;
+            color: #888;
+        }
+    }
+    body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        color: #2b2b2b;
+        font-size: 10pt;
+        line-height: 1.45;
+    }
+    h1 { font-size: 19pt; margin: 0 0 2pt 0; color: #1f3a5f; }
+    h2 {
+        font-size: 14pt;
+        margin: 0 0 6pt 0;
+        color: #1f3a5f;
+        border-bottom: 2px solid #1f3a5f;
+        padding-bottom: 3pt;
+        page-break-after: avoid;
+    }
+    h3 {
+        font-size: 11pt;
+        margin: 12pt 0 4pt 0;
+        color: #3d5a80;
+        page-break-after: avoid;
+    }
+    .subtitle { font-size: 10pt; color: #666; margin-bottom: 14pt; }
+    .cover-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10pt;
+        margin: 10pt 0 16pt 0;
+    }
+    .meta-box {
+        background: #f4f6f9;
+        border-radius: 4pt;
+        padding: 7pt 12pt;
+        min-width: 130pt;
+    }
+    .meta-box .k { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.5pt; color: #888; }
+    .meta-box .v { font-size: 12pt; font-weight: bold; color: #1f3a5f; }
+
+    .summary-box {
+        background: #eef3f8;
+        border-left: 4pt solid #1f3a5f;
+        border-radius: 3pt;
+        padding: 10pt 14pt;
+        margin-bottom: 14pt;
+    }
+    .summary-box p { margin: 4pt 0; }
+
+    ul.highlights { margin: 6pt 0 0 0; padding-left: 16pt; }
+    ul.highlights li { margin-bottom: 3pt; }
+
+    .game-section {
+        page-break-before: always;
+        padding-top: 4pt;
+    }
+    .game-desc {
+        color: #555;
+        font-style: italic;
+        margin-bottom: 10pt;
+    }
+    .domain-blurb {
+        color: #666;
+        font-size: 9pt;
+        margin: 0 0 6pt 0;
+    }
+
+    table.metrics {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 6pt;
+        font-size: 9pt;
+    }
+    table.metrics th {
+        text-align: left;
+        font-size: 8pt;
+        text-transform: uppercase;
+        letter-spacing: 0.4pt;
+        color: #888;
+        border-bottom: 1px solid #ccc;
+        padding: 3pt 6pt;
+    }
+    table.metrics td {
+        padding: 4pt 6pt;
+        vertical-align: middle;
+        border-bottom: 1px solid #eee;
+    }
+    .metric-label { font-weight: bold; color: #2b2b2b; }
+    .metric-note { color: #999; font-size: 7.5pt; margin-top: 1pt; }
+    .metric-value { white-space: nowrap; font-weight: bold; }
+
+    .pct-track {
+        position: relative;
+        width: 100%;
+        height: 7pt;
+        background: #e4e9ef;
+        border-radius: 4pt;
+    }
+    .pct-zone-typical {
+        position: absolute;
+        left: 25%;
+        width: 50%;
+        height: 100%;
+        background: #d6e4d2;
+        border-radius: 2pt;
+    }
+    .pct-marker {
+        position: absolute;
+        top: -2pt;
+        width: 3pt;
+        height: 11pt;
+        border-radius: 2pt;
+        background: #1f3a5f;
+    }
+    .band-text { font-size: 8pt; color: #666; white-space: nowrap; }
+
+    .disclaimer {
+        margin-top: 18pt;
+        padding-top: 8pt;
+        border-top: 1px solid #ddd;
+        font-size: 8pt;
+        color: #888;
+    }
+    .not-measured { color: #aaa; font-style: italic; font-size: 9pt; }
+</style>
+</head>
+<body>
+
+<h1>Behavioral Performance Report</h1>
+<div class="subtitle">Tablet-based gaze &amp; touch assessment &mdash; generated {{ generated_date }}</div>
+
+<div class="cover-meta">
+    <div class="meta-box"><div class="k">Patient ID</div><div class="v">{{ patient_id }}</div></div>
+    <div class="meta-box"><div class="k">Age</div><div class="v">{{ age }} ({{ age_group_label }})</div></div>
+    <div class="meta-box"><div class="k">Games Completed</div><div class="v">{{ games|length }} of 6</div></div>
+    <div class="meta-box"><div class="k">Peer Comparison Group</div><div class="v">{{ age_group_label }}, n={{ peer_group_size }}</div></div>
+</div>
+
+<div class="summary-box">
+    <h2 style="border:none; margin-bottom:4pt;">Summary</h2>
+    <p>{{ modality_summary }}</p>
+    {% if highlights %}
+    <p><strong>Notable patterns across games</strong> (largest differences from same-age-group peers):</p>
+    <ul class="highlights">
+        {% for h in highlights %}
+        <li>
+            <strong>{{ h.game }} &mdash; {{ h.label }}:</strong>
+            {{ h.value }}{{ h.unit }} &mdash; {{ h.band }}.
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+{% for game in games %}
+<div class="game-section">
+    <h2>{{ game.name }}</h2>
+    <div class="game-desc">{{ game.description }}</div>
+
+    {% for domain in game.domains %}
+    <h3>{{ domain.label }}</h3>
+    <div class="domain-blurb">{{ domain.blurb }}</div>
+    <table class="metrics">
+        <tr>
+            <th style="width:34%;">Measure</th>
+            <th style="width:12%;">Patient's Value</th>
+            <th style="width:54%;">Compared to Peers (same age group)</th>
+        </tr>
+        {% for m in domain.metrics %}
+        <tr>
+            <td>
+                <div class="metric-label">{{ m.label }}</div>
+                <div class="metric-note">{{ m.note }}</div>
+            </td>
+            <td class="metric-value">
+                {% if m.value is not none %}
+                    {{ m.value }}{% if m.unit %} {{ m.unit }}{% endif %}
+                {% else %}
+                    <span class="not-measured">not measured</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if m.percentile is not none %}
+                <div class="pct-track">
+                    <div class="pct-zone-typical"></div>
+                    <div class="pct-marker" style="left: calc({{ m.percentile }}% - 1.5pt);"></div>
+                </div>
+                <div class="band-text">{{ m.band }} (peer percentile: {{ m.percentile|round(0, 'common')|int }}%)</div>
+                {% else %}
+                <span class="not-measured">no peer comparison available</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<div class="disclaimer">
+    This report summarizes data-driven behavioral measurements collected during structured tablet
+    games and compares them to other recorded participants in the same broad age group
+    (n={{ peer_group_size }} of {{ cohort_size }} total participants). It is intended as a
+    descriptive aid for occupational therapy assessment and does not constitute a diagnosis.
+    All clinical interpretation should be made by a qualified professional in the context of the
+    full patient history.
+</div>
+
+</body>
+</html>

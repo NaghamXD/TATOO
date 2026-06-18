@@ -10,3 +10,5 @@ hdbscan==0.8.41
 imbalanced-learn==0.14.1
 statsmodels==0.14.6
 openpyxl==3.1.5
+jinja2==3.1.6
+weasyprint==69.0
